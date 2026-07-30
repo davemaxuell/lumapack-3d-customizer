@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="LumaPack 01을 360도로 살펴보고 원하는 색상으로 커스터마이징하는 Three.js 기반 3D 제품 경험."
+    />
+    <meta name="theme-color" content="#11130f" />
+    <meta property="og:title" content="LumaPack 01 — 3D Product Customizer" />
+    <meta
+      property="og:description"
+      content="Rotate. Recolor. Reimagine. Three.js로 구현한 모듈형 백팩 3D 커스터마이저."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>LumaPack 01 — 3D Customizer</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#product-info">제품 정보로 바로가기</a>
+
+    <div class="site-frame">
+      <header class="site-header" aria-label="주요 메뉴">
+        <a class="brand" href="#" aria-label="Luma 홈페이지">
+          <span class="brand-mark" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </span>
+          <span>LUMA<span class="brand-slash">/</span>OBJECTS</span>
+        </a>
+
+        <nav class="header-index" aria-label="페이지 인덱스">
+          <a href="#viewer"><span>01</span> Object</a>
+          <a href="#system"><span>02</span> System</a>
+        </nav>
+
+        <div class="availability">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Seoul · In stock
+        </div>
+      </header>
+
+      <main>
+        <section class="product-hero" id="viewer" aria-labelledby="product-title">
+          <div class="stage-wrap">
+            <div class="stage-grid" aria-hidden="true"></div>
+            <div class="stage-number" aria-hidden="true">01</div>
+            <div class="stage-axis stage-axis-x" aria-hidden="true">X</div>
+            <div class="stage-axis stage-axis-y" aria-hidden="true">Y</div>
+
+            <div class="loading-state" id="loading-state" role="status" aria-live="polite">
+              <div class="loader-glyph" aria-hidden="true"><span></span><span></span><span></span></div>
+              <p>3D OBJECT LOADING</p>
+              <strong id="load-progress">0%</strong>
+            </div>
+
+            <canvas id="product-canvas" aria-label="마우스나 손가락으로 회전할 수 있는 LumaPack 01 3D 모델"></canvas>
+
+            <button
+              class="hotspot hotspot-one"
+              type="button"
+              data-feature="shell"
+              data-x="0.75"
+              data-y="0.8"
+              data-z="0.72"
+              aria-label="소재 설명 보기"
+            >
+              <span>01</span>
+            </button>
+            <button
+              class="hotspot hotspot-two"
+              type="button"
+              data-feature="strap"
+              data-x="-1.35"
+              data-y="-0.45"
+              data-z="0.25"
+              aria-label="수납 시스템 설명 보기"
+            >
+              <span>02</span>
+            </button>
+            <button
+              class="hotspot hotspot-three"
+              type="button"
+              data-feature="hardware"
+              data-x="0.62"
+              data-y="-0.72"
+              data-z="1.05"
+              aria-label="하드웨어 설명 보기"
+            >
+              <span>03</span>
+            </button>
+
+            <div class="feature-note" id="feature-note" aria-live="polite">
+              <span id="feature-index">01</span>
+              <div>
+                <strong id="feature-title">WEATHER SHELL</strong>
+                <p id="feature-copy">발수 코팅된 립스탑 셸이 일상의 변수로부터 장비를 보호합니다.</p>
+              </div>
+            </div>
+
+            <div class="stage-toolbar" aria-label="3D 모델 조작">
+              <button class="tool-button" id="rotate-left" type="button" aria-label="왼쪽으로 45도 회전">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 7 4 12l5 5M4 12h10a6 6 0 1 1-4.7 9.7" />
+                </svg>
+              </button>
+              <button class="tool-button" id="auto-rotate" type="button" aria-pressed="false" aria-label="자동 회전">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 7v5h-5M4 17v-5h5M6.1 8A7 7 0 0 1 18.5 7M17.9 16A7 7 0 0 1 5.5 17" />
+                </svg>
+              </button>
+              <button class="tool-button" id="rotate-right" type="button" aria-label="오른쪽으로 45도 회전">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m15 7 5 5-5 5M20 12H10a6 6 0 1 0 4.7 9.7" />
+                </svg>
+              </button>
+              <span class="toolbar-divider" aria-hidden="true"></span>
+              <button class="tool-button" id="reset-view" type="button" aria-label="시점 초기화">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 4v6h6M20 20v-6h-6M5.6 15A7 7 0 0 0 18 17M18.4 9A7 7 0 0 0 6 7" />
+                </svg>
+              </button>
+            </div>
+
+            <p class="drag-hint"><span aria-hidden="true">↔</span> Drag to inspect · Scroll to zoom</p>
+          </div>
+
+          <article class="product-info" id="product-info">
+            <div class="product-meta">
+              <p class="eyebrow"><span>Field equipment</span><span>Edition 01 / 100</span></p>
+              <div class="title-row">
+                <h1 id="product-title">LUMA<span>/</span><br />PACK 01</h1>
+                <div class="object-seal" aria-label="Luma 인증 오브젝트">
+                  <svg viewBox="0 0 100 100" aria-hidden="true">
+                    <defs>
+                      <path id="seal-circle" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0" />
+                    </defs>
+                    <text><textPath href="#seal-circle">LUMA FIELD OBJECT · SEOUL · </textPath></text>
+                    <path class="seal-icon" d="M38 57V43h24v14M44 43v-6h12v6M43 49h14" />
+                  </svg>
+                </div>
+              </div>
+
+              <p class="product-lede">
+                도시의 리듬과 주말의 트레일 사이. 한 개의 가방으로 매일의 이동을 다시 설계하세요.
+                18L 모듈형 구조와 날씨 대응 셸을 갖춘 도심형 필드 팩입니다.
+              </p>
+
+              <div class="edition-line">
+                <span>18L / 1.42KG</span>
+                <span>Designed in Seoul</span>
+              </div>
+            </div>
+
+            <div class="purchase-panel">
+              <div class="color-section">
+                <div class="section-label">
+                  <span>Shell colour</span>
+                  <strong id="selected-color">Lichen Signal</strong>
+                </div>
+                <div class="swatches" role="radiogroup" aria-label="가방 색상 선택">
+                  <button
+                    class="swatch is-active"
+                    type="button"
+                    role="radio"
+                    aria-checked="true"
+                    data-color="#c9dd3c"
+                    data-name="Lichen Signal"
+                    style="--swatch: #c9dd3c"
+                  ><span class="sr-only">Lichen Signal</span></button>
+                  <button
+                    class="swatch"
+                    type="button"
+                    role="radio"
+                    aria-checked="false"
+                    data-color="#e14c35"
+                    data-name="Canyon Red"
+                    style="--swatch: #e14c35"
+                  ><span class="sr-only">Canyon Red</span></button>
+                  <button
+                    class="swatch"
+                    type="button"
+                    role="radio"
+                    aria-checked="false"
+                    data-color="#315fc5"
+                    data-name="Vector Blue"
+                    style="--swatch: #315fc5"
+                  ><span class="sr-only">Vector Blue</span></button>
+                  <button
+                    class="swatch"
+                    type="button"
+                    role="radio"
+                    aria-checked="false"
+                    data-color="#373b35"
+                    data-name="Graphite"
+                    style="--swatch: #373b35"
+                  ><span class="sr-only">Graphite</span></button>
+                </div>
+              </div>
+
+              <div class="price-row">
+                <div>
+                  <span>Price</span>
+                  <strong>₩189,000</strong>
+                </div>
+                <span class="delivery">무료 배송 · 2–3일</span>
+              </div>
+
+              <button class="add-button" id="add-to-cart" type="button">
+                <span>Add to field kit</span>
+                <span class="add-arrow" aria-hidden="true">↗</span>
+              </button>
+
+              <p class="microcopy">30일 무료 반품 · 평생 수선 서비스 · 2년 품질 보증</p>
+            </div>
+          </article>
+        </section>
+
+        <section class="system-section" id="system" aria-labelledby="system-title">
+          <div class="section-rail">
+            <span>02 / SYSTEM</span>
+            <span>Built for variable days</span>
+          </div>
+
+          <div class="system-intro">
+            <p class="kicker">More than storage</p>
+            <h2 id="system-title">하나의 셸.<br /><em>세 가지 이동 방식.</em></h2>
+            <p>
+              출근, 라이딩, 짧은 하이킹까지. 필요한 기능만 남기고 불필요한 장식을 덜어낸
+              적응형 수납 시스템입니다.
+            </p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card feature-card-main">
+              <span class="card-index">01</span>
+              <div class="material-diagram" aria-hidden="true">
+                <div class="material-ring ring-a"></div>
+                <div class="material-ring ring-b"></div>
+                <div class="material-core">12K</div>
+                <span class="diagram-label label-a">DWR</span>
+                <span class="diagram-label label-b">RIPSTOP</span>
+              </div>
+              <div class="card-copy">
+                <p>Weather shell</p>
+                <h3>비가 와도<br />계획은 그대로.</h3>
+                <span>12,000mm 발수 셸 / 이중 코팅 지퍼</span>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <span class="card-index">02</span>
+              <div class="line-icon strap-icon" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="card-copy">
+                <p>Adaptive harness</p>
+                <h3>S-커브<br />하네스.</h3>
+                <span>3D 에어 메시 / 4점 하중 분산</span>
+              </div>
+            </article>
+
+            <article class="feature-card feature-card-accent">
+              <span class="card-index">03</span>
+              <div class="line-icon grid-icon" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <div class="card-copy">
+                <p>Modular storage</p>
+                <h3>공간을<br />다시 나누다.</h3>
+                <span>16″ 노트북 / 퀵 액세스 / 탈착 파우치</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="spec-strip" aria-label="제품 사양">
+            <div><span>Volume</span><strong>18<small>L</small></strong></div>
+            <div><span>Weight</span><strong>1.42<small>KG</small></strong></div>
+            <div><span>Water column</span><strong>12<small>K MM</small></strong></div>
+            <div><span>Warranty</span><strong>02<small>YR</small></strong></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div>
+          <a class="brand brand-footer" href="#"><span>LUMA<span class="brand-slash">/</span>OBJECTS</span></a>
+          <p>Objects for moving through uncertain weather.</p>
+        </div>
+        <div class="footer-meta">
+          <p>Three.js · GLB · WebGL</p>
+          <p>Final Project 23-1 · 2026</p>
+        </div>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+      <span class="toast-check" aria-hidden="true">✓</span>
+      <div><strong>FIELD KIT에 담았습니다.</strong><span id="toast-detail">Lichen Signal · 1 item</span></div>
+      <button type="button" id="close-toast" aria-label="알림 닫기">×</button>
+    </div>
+
+    <noscript>이 3D 제품 페이지를 사용하려면 JavaScript를 활성화해주세요.</noscript>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

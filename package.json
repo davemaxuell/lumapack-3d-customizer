@@ -1,0 +1,22 @@
+{
+  "name": "lumapack-3d-customizer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Interactive Three.js product customizer for the LumaPack 01 modular backpack.",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "generate:model": "node scripts/generate-model.mjs",
+    "report": "python scripts/generate-report.py"
+  },
+  "dependencies": {
+    "@fontsource/barlow-condensed": "5.3.0",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "vite": "8.1.5"
+  }
+}
