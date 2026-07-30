@@ -6,9 +6,9 @@ Three.js로 제작한 모듈형 백팩 3D 제품 상세 페이지입니다. 사�
 
 ## 제출 링크
 
-- Netlify: `배포 후 최종 URL 반영 예정`
+- Netlify: https://lumapack-3d-customizer.netlify.app
 - GitHub: https://github.com/davemaxuell/lumapack-3d-customizer
-- 프로젝트 소개 및 회고 PDF: `public/report/LumaPack_3D_Project_Report.pdf`
+- 프로젝트 소개 및 회고 PDF: https://lumapack-3d-customizer.netlify.app/report/LumaPack_3D_Project_Report.pdf
 
 ## 주요 기능
 
